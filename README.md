@@ -51,96 +51,21 @@ By using this Website Audit Tool, the founder can enter their website URL and in
 
 🛠 Tech Stack
 
-Backend: Node.js / Python (Flask or Django)
-
-Frontend: React.js / Next.js (for dashboard UI)
-
+Backend: Node.js,Express.jsand ejs(templating language)
+Frontend: Html,css and Java Script
 Database: MongoDB / PostgreSQL (for storing reports & history)
-
 Security Scanning: OWASP ZAP API / Custom Scripts
-
 Performance Testing: Lighthouse, Puppeteer
-
-SEO & Accessibility Checks: axe-core, Google PageSpeed API
-
-🚀 Getting Started
-📋 Prerequisites
-
-Make sure you have installed:
-
-Node.js (v16+) or Python (3.8+)
-
-npm / pip
-
-Git
-
-⚙ Installation
-# Clone the repository
-git clone https://github.com/your-username/website-audit-tool.git
-
-# Navigate to project folder
-cd website-audit-tool
-
-# Install dependencies
-npm install   # (if Node.js)
-pip install -r requirements.txt   # (if Python)
-
-▶ Usage
-# Run the tool (Node.js)
-npm start
-
-# Or (Python)
-python app.py
+SEO & Accessibility Checks: Google Colab
 
 
 Enter the website URL in the UI or via CLI, and the tool will generate a detailed report.
 
 📊 Sample Report Preview
-
 Security: ✅ SSL enabled, ⚠ Missing security headers
-
 Performance: ❌ Page load time > 4s, ⚠ Images not compressed
-
 SEO: ⚠ Missing meta description, ✅ Sitemap found
-
 Accessibility: ⚠ Low color contrast, ❌ Missing ARIA labels
-
 ✅ Each issue comes with step-by-step recommendations.
 
-📂 Project Structure
-website-audit-tool/
-│── backend/          # API, scanning scripts, security checks
-│── frontend/         # React/Next.js UI for reports
-│── reports/          # Generated audit reports
-│── config/           # Config files & constants
-│── README.md         # Project documentation
-│── package.json      # Node.js dependencies
-│── requirements.txt  # Python dependencies
 
-🤝 Contributing
-
-Contributions are welcome! 🚀
-
-Fork the project
-
-Create a feature branch (git checkout -b feature-name)
-
-Commit changes (git commit -m "Add feature")
-
-Push to branch (git push origin feature-name)
-
-Open a Pull Request
-
-📜 License
-
-This project is licensed under the MIT License – feel free to use and modify it.
-
-👨‍💻 Authors
-
-Your Name – Developer & Maintainer
-
-Contributions are welcome from the community!
-
-👉 With this README, your repo will look professional and complete.
-
-Do you also want me to create a badges section (e.g., build passing ✅, license, stars, etc.) at the top so your project looks like a polished open-source tool?
