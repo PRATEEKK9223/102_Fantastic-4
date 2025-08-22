@@ -1,0 +1,96 @@
+<!-- # HTML template with embedded CSS and JS
+TEMPLATE = """ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Website Audit Tool</title>
+    <!-- <style>{{style}}</style> -->
+</head>
+<body>
+    <div class="container">
+        <h1>Website Audit Tool</h1>
+        <p>Enter the URL of your website to get a detailed audit report:</p>
+        <form id="audit-form">
+            <input type="url" id="url-input" placeholder="https://example.com" required />
+            <button type="submit">Audit Now</button>
+        </form>
+        <div id="progress" class="hidden">Scanning your website...</div>
+        <div id="results"></div>
+    </div>
+
+    <script>
+        const form = document.getElementById('audit-form');
+        const urlInput = document.getElementById('url-input');
+        const resultsDiv = document.getElementById('results');
+        const progressDiv = document.getElementById('progress');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            resultsDiv.innerHTML = '';
+            progressDiv.classList.remove('hidden');
+
+            const url = urlInput.value.trim();
+
+            if (!url) {
+                alert('Please enter a URL.');
+                progressDiv.classList.add('hidden');
+                return;
+            }
+
+            try {
+                const response = await fetch('/audit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url }),
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    alert(errorData.error || 'Failed to audit website.');
+                    progressDiv.classList.add('hidden');
+                    return;
+                }
+
+                const data = await response.json();
+                progressDiv.classList.add('hidden');
+                displayResults(data);
+            } catch (err) {
+                alert('An error occurred: ' + err.message);
+                progressDiv.classList.add('hidden');
+            }
+        });
+
+        function displayResults(data) {
+            for (const category in data) {
+                const categoryDiv = document.createElement('div');
+                const title = document.createElement('h2');
+                title.textContent = capitalize(category) + ' Issues';
+                categoryDiv.appendChild(title);
+
+                if (data[category].length === 0) {
+                    const noIssues = document.createElement('p');
+                    noIssues.textContent = 'No issues found.';
+                    categoryDiv.appendChild(noIssues);
+                } else {
+                    data[category].forEach((item) => {
+                        const issueDiv = document.createElement('div');
+                        issueDiv.classList.add('issue');
+                        issueDiv.innerHTML = `
+                            <div class="issue-title issue-type-${item.type}">${item.type}: ${item.issue}</div>
+                            <div class="recommendation">Recommendation: ${item.recommendation}</div>
+                        `;
+                        categoryDiv.appendChild(issueDiv);
+                    });
+                }
+                resultsDiv.appendChild(categoryDiv);
+            }
+        }
+
+        function capitalize(text) {
+            return text.charAt(0).toUpperCase() + text.slice(1);
+        }
+    </script>
+</body>
+</html>
